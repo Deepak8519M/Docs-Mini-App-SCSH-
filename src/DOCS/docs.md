@@ -1000,4 +1000,3 @@ useEffect(() => {
 
 ---
 
-Want a simple working example of scrolling or animation using your ref?
