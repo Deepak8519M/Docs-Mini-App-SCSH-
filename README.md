@@ -2,7 +2,7 @@ Sure. Below is your complete and beautified `README.md` content for your **Card 
 
 ---
 
-````markdown
+
 # 📇 Card Dashboard with Animated Form
 
 A modern React application featuring a dynamic card dashboard with an animated form for adding new cards. Built with **Framer Motion** for smooth animations and **Tailwind CSS** for styling.
@@ -311,4 +311,4 @@ This project is licensed under the MIT License. See the `LICENSE` file for detai
 
 Let me know if you'd like me to automatically create the `README.md` file in your project folder or add a section (like screenshots or GIF demos).
 ```
-````
+
