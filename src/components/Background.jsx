@@ -3,7 +3,7 @@ import React from "react";
 function Background() {
   return (
     <>
-      <div className="w-full h-screen fixed z-2">
+      <div className="w-full h-screen fixed z-[2]">
         <div className="w-full py-7 flex justify-center text-zinc-500 text-xl  font-semibold absolute top-[5%] ">
           Documents.
         </div>
