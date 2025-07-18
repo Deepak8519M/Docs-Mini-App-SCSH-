@@ -1,9 +1,7 @@
 import React from "react";
 
 function Foreground() {
-  return (
-    <div className="w-full h-screen fixed top-0 left-0 z-[3]  bg-sky-800"></div>
-  );
+  return <div className="w-full h-screen fixed top-0 left-0 z-[3]  "></div>;
 }
 
 export default Foreground;
