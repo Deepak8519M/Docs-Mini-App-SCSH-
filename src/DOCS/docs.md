@@ -848,3 +848,64 @@ function Foreground() {
 - Your red background wasn’t appearing because your children (`Background`, `Foreground`) were `fixed` and thus visually floating on top, despite your main `z-[4]`.
 
 ---
+Great question!
+
+The reason the `blue` background **is not getting applied** in this line:
+
+```jsx
+<div className={`tag w-full py-3 bg-${data.tag.tagColor}-600 `}>
+```
+
+is because **Tailwind CSS does not support dynamic class names** like `bg-${variable}-600` **at runtime**.
+
+### 🔍 Why this happens:
+
+Tailwind works by **pre-generating a list of all class names** it finds in your code. So if you use a **dynamic class like `bg-${something}`**, Tailwind **doesn’t know in advance** what value `${something}` will be, and it doesn’t generate that class in the final CSS bundle — **so no styles are applied**.
+
+---
+
+### ✅ How to fix it
+
+You need to **manually map** the `tagColor` string to a full Tailwind class name. Here's how:
+
+#### ✅ Solution 1: Use a color map
+
+Update the `Card` component like this:
+
+```js
+const colorMap = {
+  green: "bg-green-600",
+  blue: "bg-blue-600",
+  red: "bg-red-600",
+  // Add more if needed
+};
+```
+
+Then change this line:
+
+```jsx
+<div className={`tag w-full py-3 ${colorMap[data.tag.tagColor]}`}>
+```
+
+This way, Tailwind can pick up all the color classes during build time (`bg-green-600`, `bg-blue-600`, etc.) and apply them properly.
+
+---
+
+### ✅ Alternate: Use conditional rendering (not preferred for many colors)
+
+```jsx
+<div
+  className={`tag w-full py-3 ${
+    data.tag.tagColor === "green"
+      ? "bg-green-600"
+      : data.tag.tagColor === "blue"
+      ? "bg-blue-600"
+      : ""
+  }`}
+>
+```
+
+But this is less scalable. Use the `colorMap` approach if you plan to add more colors.
+
+---
+

@@ -2,10 +2,15 @@ import React from "react";
 import { FaRegFileAlt } from "react-icons/fa";
 import { LuDownload } from "react-icons/lu";
 import { IoIosClose } from "react-icons/io";
+import { motion } from "framer-motion";
 
-function Card({ data }) {
+function Card({ data, reference }) {
   return (
-    <div className="w-[170px] h-[200px]  relative rounded-[23px] overflow-hidden text-white p-3 bg-zinc-900/90">
+    <motion.div
+      drag
+      dragConstraints={reference}
+      className="w-[170px] h-[200px]  relative rounded-[23px] overflow-hidden text-white p-3 bg-zinc-900/90"
+    >
       <FaRegFileAlt />
       <p className="text-xs mt-5 font-semibold  leading-tight">{data.desc}</p>
 
@@ -21,14 +26,18 @@ function Card({ data }) {
           </span>
         </div>
         {data.tag.isOpen && (
-          <div className="tag w-full py-3 bg-green-600">
+          <div
+            className={`tag w-full py-3 ${
+              data.tag.tagColor === "blue" ? "bg-blue-600" : "bg-green-600"
+            } `}
+          >
             <h3 className="text-[13px] font-semibold flex items-center justify-center">
               {data.tag.tagTitle}
             </h3>
           </div>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 }
 
