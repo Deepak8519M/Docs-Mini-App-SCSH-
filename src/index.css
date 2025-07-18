@@ -10,3 +10,7 @@
   font-family: "Poppins", sans-serif;
   font-family: "Urbanist", sans-serif;
 }
+
+::selection {
+  color: rgb(232, 145, 47);
+}
