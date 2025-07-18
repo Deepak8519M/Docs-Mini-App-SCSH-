@@ -11,6 +11,7 @@ function Card({ data, reference }) {
       dragConstraints={reference}
       whileDrag={{ scale: 1.3 }}
       dragElastic={0.1}
+      dragTransition={{ bounceStiffness: 600, bounceDamping: 10 }}
       className="w-[170px] h-[200px]  relative rounded-[23px] overflow-hidden text-white p-3 bg-zinc-900/90"
     >
       <FaRegFileAlt />
