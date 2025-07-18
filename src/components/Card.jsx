@@ -20,13 +20,13 @@ function Card({ data }) {
             )}
           </span>
         </div>
-        {data.tag.isOpen ? (
+        {data.tag.isOpen && (
           <div className="tag w-full py-3 bg-green-600">
             <h3 className="text-[13px] font-semibold flex items-center justify-center">
-              Downlodad Now
+              {data.tag.tagTitle}
             </h3>
           </div>
-        ) : null}
+        )}
       </div>
     </div>
   );
