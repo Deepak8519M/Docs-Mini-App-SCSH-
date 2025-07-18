@@ -2,13 +2,15 @@ import React from "react";
 import { FaRegFileAlt } from "react-icons/fa";
 import { LuDownload } from "react-icons/lu";
 import { IoIosClose } from "react-icons/io";
-import { motion } from "framer-motion";
+import { motion, scale } from "framer-motion";
 
 function Card({ data, reference }) {
   return (
     <motion.div
       drag
       dragConstraints={reference}
+      whileDrag={{ scale: 1.3 }}
+      dragElastic={0.1}
       className="w-[170px] h-[200px]  relative rounded-[23px] overflow-hidden text-white p-3 bg-zinc-900/90"
     >
       <FaRegFileAlt />
