@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import Card from "./Card";
 import { FaPlus } from "react-icons/fa6";
 import { IoIosClose } from "react-icons/io";
+import { motion, AnimatePresence } from "framer-motion"; // Add Framer Motion imports
 
 function Foreground() {
   const ref = useRef(null);
@@ -74,7 +75,7 @@ function Foreground() {
   };
 
   return (
-    <div className="relative w-full h-screen">
+    <div className="relative cursor-pointer w-full h-screen">
       <div
         ref={ref}
         className="fixed top-0 left-0 z-[3] w-full h-screen flex gap-8 flex-wrap p-5"
@@ -84,88 +85,95 @@ function Foreground() {
         ))}
       </div>
 
-      {openForm && (
-        <div className="w-[300px] h-[340px] bg-white absolute bottom-[110px] right-5 z-[10] shadow-lg rounded-md">
-          <IoIosClose
-            onClick={() => setOpenForm(false)}
-            className="text-[30px] absolute top-2 right-2 cursor-pointer"
-          />
-          <form
-            onSubmit={handleSubmit}
-            className="p-4 flex flex-col gap-3 mt-6"
+      <AnimatePresence>
+        {openForm && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.8, y: 20 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+            className="w-[300px] h-[350px] bg-white absolute bottom-[110px] right-5 z-[10] shadow-lg rounded-md"
           >
-            <input
-              type="text"
-              name="desc"
-              value={formData.desc}
-              onChange={handleInputChange}
-              placeholder="Description"
-              className="w-full border-2 border-black p-1 rounded"
+            <IoIosClose
+              onClick={() => setOpenForm(false)}
+              className="text-[30px] absolute top-2 right-2 cursor-pointer"
             />
-            <input
-              type="text"
-              name="fileSize"
-              value={formData.fileSize}
-              onChange={handleInputChange}
-              placeholder="File size (e.g., .9mb)"
-              className="w-full border-2 border-black p-1 rounded"
-            />
-            <div className="flex justify-between items-center gap-2">
+            <form
+              onSubmit={handleSubmit}
+              className="p-4 flex flex-col gap-3 mt-6"
+            >
               <input
                 type="text"
-                name="tagTitle"
-                value={formData.tagTitle}
+                name="desc"
+                value={formData.desc}
                 onChange={handleInputChange}
-                placeholder="Tag title"
-                className="w-[50%] border-2 border-black p-2 rounded"
+                placeholder="Description"
+                className="w-full border-2 border-black p-1 rounded"
               />
-              <div className="flex w-[50%] items-center justify-between ">
-                <label className="text-[12px] font-bold">Status</label>
-                <select
-                  name="close"
-                  value={formData.close}
+              <input
+                type="text"
+                name="fileSize"
+                value={formData.fileSize}
+                onChange={handleInputChange}
+                placeholder="File size (e.g., .9mb)"
+                className="w-full border-2 border-black p-1 rounded"
+              />
+              <div className="flex justify-between items-center gap-2">
+                <input
+                  type="text"
+                  name="tagTitle"
+                  value={formData.tagTitle}
                   onChange={handleInputChange}
-                  className="w-[70%] border-2 text-[14px] border-black p-2 rounded"
+                  placeholder="Tag title"
+                  className="w-[50%] border-2 border-black p-2 rounded"
+                />
+                <div className="flex w-[50%] items-center justify-between">
+                  <label className="text-[12px] font-bold">Status</label>
+                  <select
+                    name="close"
+                    value={formData.close}
+                    onChange={handleInputChange}
+                    className="w-[70%] border-2 text-[14px] border-black p-2 rounded"
+                  >
+                    <option value={true}>True</option>
+                    <option value={false}>False</option>
+                  </select>
+                </div>
+              </div>
+              <div className="flex items-center justify-between">
+                <label className="text-[12px] font-bold">TagColor</label>
+                <select
+                  name="tagColor"
+                  value={formData.tagColor}
+                  onChange={handleInputChange}
+                  className="border-2 w-[80%] border-black p-2 rounded"
+                >
+                  <option value="green">Green</option>
+                  <option value="blue">Blue</option>
+                </select>
+              </div>
+              <div className="flex items-center justify-between">
+                <label className="text-[12px] font-bold">Visibility</label>
+                <select
+                  name="isOpen"
+                  value={formData.isOpen}
+                  onChange={handleInputChange}
+                  className="w-[80%] border-2 border-black p-1 rounded"
                 >
                   <option value={true}>True</option>
                   <option value={false}>False</option>
                 </select>
               </div>
-            </div>
-
-            <div className="flex items-center justify-between">
-              <label className="text-[12px] font-bold">TagColor</label>
-              <select
-                name="tagColor"
-                value={formData.tagColor}
-                onChange={handleInputChange}
-                className=" border-2 w-[80%]  border-black p-2 rounded"
+              <button
+                type="submit"
+                className="bg-green-500 text-white p-2 rounded hover:bg-green-600"
               >
-                <option value="green">Green</option>
-                <option value="blue">Blue</option>
-              </select>
-            </div>
-            <div className="flex items-center justify-between">
-              <label className="text-[12px] font-bold">Visibility</label>
-              <select
-                name="isOpen"
-                value={formData.isOpen}
-                onChange={handleInputChange}
-                className=" w-[80%] border-2 border-black p-1 rounded"
-              >
-                <option value={true}>True</option>
-                <option value={false}>False</option>
-              </select>
-            </div>
-            <button
-              type="submit"
-              className="bg-green-500 text-white p-2 rounded hover:bg-green-600"
-            >
-              Submit
-            </button>
-          </form>
-        </div>
-      )}
+                Submit
+              </button>
+            </form>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <div
         className="fixed flex items-center justify-center bottom-4 right-4 rounded-full bg-gray-700 text-white w-[80px] h-[80px] cursor-pointer z-[40]"
