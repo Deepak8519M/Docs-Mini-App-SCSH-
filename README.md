@@ -1,8 +1,3 @@
-Sure. Below is your complete and beautified `README.md` content for your **Card Dashboard with Animated Form** project. I’ve preserved all the original details and formatted it cleanly using Markdown standards — just copy and paste this into your `README.md` file:
-
----
-
-
 # 📇 Card Dashboard with Animated Form
 
 A modern React application featuring a dynamic card dashboard with an animated form for adding new cards. Built with **Framer Motion** for smooth animations and **Tailwind CSS** for styling.
